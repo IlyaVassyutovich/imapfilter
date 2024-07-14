@@ -1,4 +1,4 @@
-FROM alpine:3.20.1 as shared
+FROM alpine:3.20.1 AS shared
 
 # Install shared dependencies
 RUN apk update
@@ -9,7 +9,7 @@ RUN apk add --no-cache pcre2
 
 
 
-FROM shared as build
+FROM shared AS build
 
 # Install build dependencies
 RUN apk add --no-cache openssl-dev
@@ -33,7 +33,7 @@ RUN make all
 
 
 
-FROM shared as final
+FROM shared AS final
 
 # Install imapfilter
 COPY --from=build /dist /dist
